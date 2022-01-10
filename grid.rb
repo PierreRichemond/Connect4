@@ -15,72 +15,69 @@ class Grid
             ]
   end
 
-  def place_disk(player, column)
-    if @board_row_index[column] == - 1
-      puts 'Column Full, choose another one'
+  def place_disk(player, column_chosen_by_player)
+    if @board_row_index[column_chosen_by_player] == - 1
+      puts 'column_chosen_by_player Full, choose another one'
     else
-      @col = @board_row_index[column]
-      @grid[@col][column] = player.player_number
-      @board_row_index[column] -= 1
-      player.win! if aligned?
+      @current_row_for_chosen_column = @board_row_index[column_chosen_by_player]
+      @grid[@current_row_for_chosen_column][column_chosen_by_player] = player.player_number
+      @board_row_index[column_chosen_by_player] -= 1
+      player.win! if aligned?(column_chosen_by_player)
     end
   end
 
-  def aligned?(column)
-    true if check_verticality(column) == 4
-    true if check_horizontallity(column) >= 4
-    # true if check_diagonals(column) >= 4
+  def aligned?(column_chosen_by_player)
+    return true if check_verticality(column_chosen_by_player) == 4
+    return true if check_horizontallity(column_chosen_by_player) >= 4
+    # return true if check_diagonals(column_chosen_by_player) >= 4
   end
 
   private
 
-  def check_verticality(column) # in progress
+  def check_verticality(column_chosen_by_player) # in progress
     count = 1
-    # column = column
-    # @col = @board_row_index[column]
-    # @board_row_index = [5, 5, 5, 5, 5, 5, 5]
-    # @grid = [
-    #           [0, 0, 0, 0, 0, 0, 0],
-    #           [0, 0, 0, 0, 0, 0, 0],
-    #           [0, 0, 0, 0, 0, 0, 0],
-    #           [0, 0, 0, 0, 0, 0, 0],
-    #           [0, 0, 0, 0, 0, 0, 0],
-    #           [0, 0, 0, 0, 0, 0, 0]
-    #         ]
-    if !@grid[@board_row_index[column] + 1].nil?
-      count += 1 if @grid[@board_row_index[column] + 1]
+    index_of_next_row_to_come = @board_row_index[column_chosen_by_player]
+    chosen_location_value = @grid[@current_row_for_chosen_column][column_chosen_by_player]
+
+    if !@grid[index_of_next_row_to_come + 2].nil?
+      count += 1 if @grid[index_of_next_row_to_come + 2][column_chosen_by_player] == chosen_location_value
     end
-      # check the column and col
-      # check the previous columns
+    if !@grid[index_of_next_row_to_come + 3].nil?
+      count += 1 if @grid[index_of_next_row_to_come + 3][column_chosen_by_player] == chosen_location_value
+    end
+    if !@grid[index_of_next_row_to_come + 4].nil?
+      count += 1 if @grid[index_of_next_row_to_come + 4][column_chosen_by_player] == chosen_location_value
+    end
     count
   end
 
-  def check_horizontallity(column) # working
+  def check_horizontallity(column_chosen_by_player) # working
     count = 1
-    @grid.each do |row|
-      if @grid[@col][column] == row[column + 1]
+    index_of_next_row_to_come = @board_row_index[column_chosen_by_player]
+    chosen_location_value = @grid[@current_row_for_chosen_column][column_chosen_by_player]
+
+    if chosen_location_value == @grid[index_of_next_row_to_come + 1][column_chosen_by_player + 1]
+      count += 1
+      if chosen_location_value == @grid[index_of_next_row_to_come + 1][column_chosen_by_player + 2]
         count += 1
-        if @grid[@col][column] == row[column + 2]
-          count += 1
-          count += 1 if @grid[@col][column] == row[column + 3]
-        end
+        count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 1][column_chosen_by_player + 3]
       end
-      if @grid[@col][column] == row[column - 1]
-        return count if (column - 1).negative?
+    end
+    if chosen_location_value == @grid[index_of_next_row_to_come + 1][column_chosen_by_player - 1]
+      return count if (column_chosen_by_player - 1).negative?
+      count += 1
+      if chosen_location_value == @grid[index_of_next_row_to_come + 1][column_chosen_by_player - 2]
+        return count if (column_chosen_by_player - 2).negative?
         count += 1
-        if @grid[@col][column] == row[column - 2]
-          return count if (column - 2).negative?
+        if chosen_location_value == @grid[index_of_next_row_to_come + 1][column_chosen_by_player - 3]
+          return count if (column_chosen_by_player - 3).negative?
           count += 1
-          if @grid[@col][column] == row[column - 3]
-              return count if (column - 3).negative?
-              count += 1
-          end
         end
       end
     end
     count
   end
 
-  def check_diagonals(player, column) # in progress
+  def check_diagonals(player, column_chosen_by_player) # in progress
   end
 end

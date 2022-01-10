@@ -10,7 +10,7 @@ class Controller
 
   def ask_location_number_to_place_disk
     location_number = @view.ask_location_number
-    if location_number.nil? || location_number.to_i.negative? || location_number.to_i >= 7
+    if location_number.nil? || location_number.to_i.negative? || location_number.to_i > 7
       @view.out_of_band
       ask_location_number_to_place_disk
     end

@@ -1,5 +1,6 @@
 require_relative "controller.rb"
-require_relative "model.rb"
+require_relative "grid.rb"
+require_relative "player.rb"
 class App
   def initialize
     @grid = Grid.new

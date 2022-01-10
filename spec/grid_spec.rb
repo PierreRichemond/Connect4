@@ -30,7 +30,7 @@ RSpec.describe Grid do
         it { expect(subject).to be_truthy }
       end
 
-       context 'when 4 disk of the same color are aligned but with one different in the middle' do
+      context 'when 4 disk of the same color are aligned but with one different in the middle' do
         let(:grid_content) do
           [
             [0, 0, 0, 0, 0, 0, 0],
@@ -178,7 +178,7 @@ RSpec.describe Grid do
     end
 
     context 'when diagonally aligned' do
-       context 'when 4 disk of the same color are aligned but with one different in the middle' do
+      context 'when 4 disk of the same color are aligned but with one different in the middle' do
         let(:grid_content) do
           [
             [0, 0, 0, 0, 0, 0, 0],
