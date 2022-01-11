@@ -2,7 +2,7 @@ require_relative "../grid.rb"
 
 RSpec.describe Grid do
   describe '#aligned?' do
-    subject { grid.aligned?(column_index) }
+    subject { grid.aligned?(column_index, board_row_index[column_index] + 1 ) }
 
     let(:grid) do
       grid = Grid.new
@@ -24,10 +24,10 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [2, 5, 5, 5, 5, 5, 5] }
+        let(:board_row_index) { [1, 5, 5, 5, 5, 5, 5] }
         let(:column_index) { 0 }
 
-        it { expect(subject).to be_truthy }
+        it {expect(subject).to be_truthy }
       end
 
       context 'when 4 disk of the same color are aligned but with one different in the middle' do
@@ -37,15 +37,15 @@ RSpec.describe Grid do
             [1, 0, 0, 0, 0, 0, 0],
             [2, 0, 0, 0, 0, 0, 0],
             [1, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0]
+            [1, 0, 0, 2, 0, 0, 0],
+            [1, 0, 0, 2, 0, 0, 0]
           ]
         end
 
-        let(:board_row_index) { [1, 5, 5, 5, 5, 5, 5] }
+        let(:board_row_index) { [0, 5, 5, 3, 5, 5, 5] }
         let(:column_index) { 0 }
 
-        it { expect(subject).to be_falsy }
+        it {expect(subject).to be_falsy }
       end
 
       context 'when 4 disk of the same color are aligned somewhere else' do
@@ -60,7 +60,7 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [5, 5, 5, 2, 5, 5, 5] }
+        let(:board_row_index) { [5, 5, 5, 1, 5, 5, 5] }
         let(:column_index) { 3 }
 
         it { expect(subject).to be_truthy }
@@ -78,10 +78,11 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [3, 5, 5, 5, 5, 5, 5] }
+        let(:board_row_index) { [2, 5, 5, 5, 5, 5, 5] }
         let(:column_index) { 0 }
 
-        it { expect(subject).to be_falsy }
+        it {
+          expect(subject).to be_falsy }
       end
     end
 
@@ -116,7 +117,7 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [5, 5, 2, 2, 2, 2, 5] }
+        let(:board_row_index) { [5, 5, 1, 1, 1, 1, 5] }
         let(:column_index) { 3 }
 
         it { expect(subject).to be_truthy }
@@ -190,7 +191,7 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [5, 4, 3, 2, 1, 5, 5] }
+        let(:board_row_index) { [4, 3, 2, 1, 0, 5, 5] }
         let(:column_index) { 0 }
 
         it { expect(subject).to be_falsy }
@@ -208,7 +209,7 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [5, 4, 3, 2, 1, 5, 5] }
+        let(:board_row_index) { [5, 3, 2, 1, 0, 5, 5] }
         let(:column_index) { 1 }
 
         it { expect(subject).to be_truthy }
@@ -226,7 +227,7 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [5, 5, 5, 2, 3, 4, 5] }
+        let(:board_row_index) { [5, 5, 5, 1, 2, 3, 4] }
         let(:column_index) { 3 }
 
         it { expect(subject).to be_truthy }
@@ -244,7 +245,7 @@ RSpec.describe Grid do
           ]
         end
 
-        let(:board_row_index) { [5, 5, 5, 2, 3, 4, 5] }
+        let(:board_row_index) { [5, 5, 5, 1, 2, 3, 5] }
         let(:column_index) { 3 }
 
         it { expect(subject).to be_falsy }
