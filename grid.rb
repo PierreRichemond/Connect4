@@ -17,13 +17,17 @@ class Grid
 
   def place_disk(player, column_chosen_by_player)
     if @board_row_index[column_chosen_by_player] == - 1
-      puts 'column_chosen_by_player Full, choose another one'
+      puts 'Chosen column full, choose another one'
     else
       current_row_for_chosen_column = @board_row_index[column_chosen_by_player]
       @grid[current_row_for_chosen_column][column_chosen_by_player] = player.player_number
       @board_row_index[column_chosen_by_player] -= 1
       player.win! if aligned?(column_chosen_by_player, current_row_for_chosen_column)
     end
+  end
+
+  def grid_full?
+    @board_row_index == [-1, -1, -1, -1, -1, -1, -1]
   end
 
   def aligned?(column_chosen_by_player, current_row_for_chosen_column)

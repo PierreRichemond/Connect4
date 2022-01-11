@@ -37,6 +37,12 @@ class App
       action = gets.chomp.to_i
       route_action(action)
       if action == 1
+        if grid.grid_full?
+          puts 'Board is full, nobody win, try again'
+          display_options
+          choice = gets.chomp.to_i
+          play_again(choice) # or quit
+        end
         if @controller.player.win?
           puts ''
            puts "CONGRATULATION #{@controller.player.name}, YOU WIN !"
