@@ -250,6 +250,42 @@ RSpec.describe Grid do
 
         it { expect(subject).to be_falsy }
       end
+
+      context 'when 2 and 2 disk of the same color are aligned to the left with a separation in the middle' do
+        let(:grid_content) do
+          [
+            [1, 1, 0, 0, 0, 0, 0],
+            [2, 2, 0, 0, 0, 0, 0],
+            [1, 2, 0, 0, 0, 0, 0],
+            [2, 1, 1, 0, 0, 0, 0],
+            [2, 1, 1, 2, 0, 0, 0],
+            [2, 1, 2, 2, 2, 1, 0]
+          ]
+        end
+
+        let(:board_row_index) { [-1, -1, 2, 3, 4, 4, 5] }
+        let(:column_index) { 3 }
+
+        it { expect(subject).to be_falsy }
+      end
+
+      context 'when 2 and 2 disk of the same color are aligned to the right with a separation in the middle' do
+        let(:grid_content) do
+          [
+            [1, 1, 0, 0, 0, 0, 0],
+            [2, 1, 0, 0, 0, 1, 0],
+            [1, 2, 0, 0, 1, 2, 0],
+            [2, 1, 1, 2, 2, 1, 0],
+            [2, 1, 1, 1, 2, 2, 0],
+            [2, 1, 2, 2, 2, 1, 0]
+          ]
+        end
+
+        let(:board_row_index) { [-1, -1, 2, 2, 1, 0, 5] }
+        let(:column_index) { 4 }
+
+        it { expect(subject).to be_falsy }
+      end
     end
   end
 end

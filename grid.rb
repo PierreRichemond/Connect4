@@ -89,7 +89,6 @@ class Grid
   def check_diagonals(column_chosen_by_player, current_row_for_chosen_column)
     count = diagonal_top_left(column_chosen_by_player, current_row_for_chosen_column)
     return count if count >= 4
-
     diagonal_top_right(column_chosen_by_player, current_row_for_chosen_column)
   end
 
@@ -100,26 +99,34 @@ class Grid
     # ----------------------------RIGHT AND UP--------------------------------------
     # check diagonal right up,  -1 UP        +1 RIGHT
     if !@grid[index_of_next_row_to_come].nil? && (column_chosen_by_player + 1) < 7
-      count += 1 if chosen_location_value == @grid[index_of_next_row_to_come][column_chosen_by_player + 1]
-      # check diagonal right up,  -2 UP        +2 RIGHT
-      if !@grid[index_of_next_row_to_come - 1].nil? && (column_chosen_by_player + 2) < 7
-        count += 1 if chosen_location_value == @grid[index_of_next_row_to_come - 1][column_chosen_by_player + 2]
-        # check diagonal right up,  -3 UP        +3 RIGHT
-        if !@grid[index_of_next_row_to_come - 2].nil? && (column_chosen_by_player + 3) < 7
-          count += 1 if chosen_location_value == @grid[index_of_next_row_to_come - 2][column_chosen_by_player + 3]
+      if chosen_location_value == @grid[index_of_next_row_to_come][column_chosen_by_player + 1]
+        count += 1
+        # check diagonal right up,  -2 UP        +2 RIGHT
+        if !@grid[index_of_next_row_to_come - 1].nil? && (column_chosen_by_player + 2) < 7
+          if chosen_location_value == @grid[index_of_next_row_to_come - 1][column_chosen_by_player + 2]
+            count += 1
+            # check diagonal right up,  -3 UP        +3 RIGHT
+            if !@grid[index_of_next_row_to_come - 2].nil? && (column_chosen_by_player + 3) < 7
+              count += 1 if chosen_location_value == @grid[index_of_next_row_to_come - 2][column_chosen_by_player + 3]
+            end
+          end
         end
       end
     end
     # ----------------------------LEFT AND DOWN--------------------------------------
     # check diagonal right up,  +1 DOWN                -1 LEFT
     if !@grid[index_of_next_row_to_come + 2].nil? && !(column_chosen_by_player - 1).negative?
-      count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 2][column_chosen_by_player - 1]
-      # check diagonal right up,  +2 DOWN                -2 LEFT
-      if !@grid[index_of_next_row_to_come + 3].nil? && !(column_chosen_by_player - 2).negative?
-        count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 3][column_chosen_by_player - 2]
-        # check diagonal right up,  +3 DOWN                -3 LEFT
-        if !@grid[index_of_next_row_to_come + 4].nil? && !(column_chosen_by_player - 3).negative?
-          count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 4][column_chosen_by_player - 3]
+      if chosen_location_value == @grid[index_of_next_row_to_come + 2][column_chosen_by_player - 1]
+        count += 1
+        # check diagonal right up,  +2 DOWN                -2 LEFT
+        if !@grid[index_of_next_row_to_come + 3].nil? && !(column_chosen_by_player - 2).negative?
+          if chosen_location_value == @grid[index_of_next_row_to_come + 3][column_chosen_by_player - 2]
+            count += 1
+            # check diagonal right up,  +3 DOWN                -3 LEFT
+            if !@grid[index_of_next_row_to_come + 4].nil? && !(column_chosen_by_player - 3).negative?
+              count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 4][column_chosen_by_player - 3]
+            end
+          end
         end
       end
     end
@@ -133,26 +140,33 @@ class Grid
     # ----------------------------LEFT AND UP--------------------------------------
     # check diagonal left up, negative and nil  -1 UP        -1 LEFT
     if !@grid[index_of_next_row_to_come].nil? && !(column_chosen_by_player - 1).negative?
-      count += 1 if chosen_location_value == @grid[index_of_next_row_to_come][column_chosen_by_player - 1]
+      if chosen_location_value == @grid[index_of_next_row_to_come][column_chosen_by_player - 1]
+        count += 1
       # check diagonal left up, negative and nil  -2 UP        -2 LEFT
-      if !@grid[index_of_next_row_to_come - 1].nil? && !(column_chosen_by_player - 2).negative?
-        count += 1 if chosen_location_value == @grid[index_of_next_row_to_come - 1][column_chosen_by_player - 2]
-        # check diagonal left up, negative and nil  -3 UP        -3 LEFT
-        if !@grid[index_of_next_row_to_come - 2].nil? && !(column_chosen_by_player - 3).negative?
-          count += 1 if chosen_location_value == @grid[index_of_next_row_to_come - 2][column_chosen_by_player - 3]
+        if !@grid[index_of_next_row_to_come - 1].nil? && !(column_chosen_by_player - 2).negative?
+          if chosen_location_value == @grid[index_of_next_row_to_come - 1][column_chosen_by_player - 2]
+            count += 1
+            # check diagonal left up, negative and nil  -3 UP        -3 LEFT
+            if !@grid[index_of_next_row_to_come - 2].nil? && !(column_chosen_by_player - 3).negative?
+              count += 1 if chosen_location_value == @grid[index_of_next_row_to_come - 2][column_chosen_by_player - 3]
+            end
+          end
         end
       end
     end
     # ----------------------------RIGHT AND DOWN--------------------------------------
     # check diagonal right up,  +1 DOWN                -1 LEFT
     if !@grid[index_of_next_row_to_come + 2].nil? && (column_chosen_by_player + 1) < 7
-      count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 2][column_chosen_by_player + 1]
-      # check diagonal right up,  +2 DOWN                -2 LEFT
-      if !@grid[index_of_next_row_to_come + 3].nil? && (column_chosen_by_player + 2) < 7
-        count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 3][column_chosen_by_player + 2]
-        # check diagonal right up,  +3 DOWN                -3 LEFT
-        if !@grid[index_of_next_row_to_come + 4].nil? && (column_chosen_by_player + 3) < 7
-          count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 4][column_chosen_by_player + 3]
+      if chosen_location_value == @grid[index_of_next_row_to_come + 2][column_chosen_by_player + 1]
+        count += 1
+        # check diagonal right up,  +2 DOWN                -2 LEFT
+        if !@grid[index_of_next_row_to_come + 3].nil? && (column_chosen_by_player + 2) < 7
+          if chosen_location_value == @grid[index_of_next_row_to_come + 3][column_chosen_by_player + 2]
+            count += 1 # check diagonal right up,  +3 DOWN                -3 LEFT
+            if !@grid[index_of_next_row_to_come + 4].nil? && (column_chosen_by_player + 3) < 7
+              count += 1 if chosen_location_value == @grid[index_of_next_row_to_come + 4][column_chosen_by_player + 3]
+            end
+          end
         end
       end
     end
