@@ -13,5 +13,6 @@ Move to the file.<br>
 Start the game doing 
 ```ruby app.rb```
 
+Enjoy the game<br>
 
-Enjoy the game
+<img width="1792" alt="Screen Shot 2021-09-06 at 18 21 14" src="https://github.com/PierreRichemond/Connect4/blob/master/connect4.png">
